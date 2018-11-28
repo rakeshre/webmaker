@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Maths Game</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
+    <link rel="stylesheet" href="style3.css">
+    </head>
+    <body>
+        <p id="intro2"> Arrange the given set of numbers in ascending order</p>
+        <div id="box">
+    <div id="container">
+        <div id="b1" class="b" ></div>
+        <div id="b2" class="b" ></div>
+        <div id="b3" class="b" ></div>
+        <div id="b4" class="b" ></div>
+        <div id="b5" class="b" ></div>
+        <div id="b6" class="b" ></div>
+        <div id="b7" class="b" ></div>
+        <div id="b8" class="b" ></div>
+        <div id="correct">Correct</div>
+        <div id="wrong" >Try Again!</div>
+        <button id="start" onclick="startg()">Start game</button>
+        <button id="check" onclick="submita()">Submit Answer</button>
+        </div>
+        <div id="rulebox"><p id="rule">Rules</p> 
+            <ul><li>This game wants you to select a number</li>
+             <li>Then,it swaps the number with its next number </li>
+                <li>If you select the last number,it swaps the last number with first number</li>
+                <li>Thus,by swapping the numbers,you should arrange the given numbers in ascending order</li>
+            </ul>
+            </div>
+        </div>
+        <script>
+        var x,y,answer,k,i1,count=0;
+            var play=false;
+            
+            function getdata(){
+                var answers=[];
+                for(i=1;i<9;i++){
+                    do{
+                      answer = Math.round(10+Math.round(Math.random()*5000)/100); 
+                    }while(answers.indexOf(answer)>-1)
+                    document.getElementById("b"+i).innerHTML=answer;
+                    answers.push(answer);
+                
+                }
+            }
+        function swap(id1,id2){
+            x=document.getElementById(id1).innerHTML;
+            y=document.getElementById(id2).innerHTML;
+            document.getElementById(id1).innerHTML= y;
+            document.getElementById(id2).innerHTML= x;
+        }
+            function startg(){
+                if(play==true){
+                   location.reload();
+                   }else{
+                       
+                getdata();
+                document.getElementById("start").innerHTML="Restart";
+                document.getElementById("check").style.display="block";
+                       play=true;
+                   }
+                
+            }
+            function submita(){
+                for(i=1;i<8;i++){
+                    
+                     if((document.getElementById("b"+i).innerHTML) < (document.getElementById("b"+(i+1)).innerHTML)){
+                         count+=1;
+                         show("correct");
+                        var crt=setTimeout(function(){
+                  hide("correct")},1000);
+                         location.reload();
+                     }   else{
+                         show("wrong");
+                        var crt=setTimeout(function(){
+                  hide("wrong")},2000);
+                     }
+//                        document.getElementById("start").style.display="block";
+//                document.getElementById("check").style.display="none";
+                    }
+                    
+                }
+            
+//            for(i=1;i<9;i++){
+//                document.getElementById("b"+i).onclick=function (){
+//                var i1="b"+i;
+//                for(d=1;d<9;d++){
+//                    document.getElementById("b"+d).onclick=function(){
+//                        var i2="b"+d;
+//                        swap(i1,i2);
+//                    }
+//                }
+//            }
+//                
+//            } 
+            function hide(id){
+          document.getElementById(id).style.display="none";
+        }
+        function show(id){
+          document.getElementById(id).style.display="block";
+        }
+        
+        
+       document.getElementById("b1").onclick=function(){
+           
+           swap("b1","b2");
+       } 
+       document.getElementById("b2").onclick=function(){
+           
+           swap("b2","b3");
+       } 
+       document.getElementById("b3").onclick=function(){
+           
+           swap("b3","b4");
+       } 
+       document.getElementById("b4").onclick=function(){
+           
+           swap("b4","b5");
+       } 
+       document.getElementById("b5").onclick=function(){
+           
+           swap("b5","b6");
+       } 
+       document.getElementById("b6").onclick=function(){
+           
+           swap("b6","b7");
+       } 
+       document.getElementById("b7").onclick=function(){
+           
+           swap("b7","b8");
+       } 
+       document.getElementById("b8").onclick=function(){
+           
+           swap("b8","b1");
+       } 
+            
+        </script>
+        
+    </body>
+</html>
