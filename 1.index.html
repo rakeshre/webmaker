@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title> Arithmetic</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
-    <link rel="stylesheet" href ="style2.css">
-    
-    
+<html lang="en">  
+    <head>
+    <title> Maths game</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=yes">
+        <link rel="stylesheet" href="sttyling.css">
     </head>
-<body>
+    <body>
     <div id="container">
         <div id="scorebox">Score:<span id="scorevalue">0</span> </div>
         <div id="correct">Correct</div>
@@ -30,18 +28,9 @@
         var playing = false;
         var score;
         var counta=0;
-        var countq=-1;
-        var result;
-        var num1;
-        var num2;
-        var ques;
-         
+        var countq=0;
 //        var accuracy;
         var startbox = document.getElementById("start");
-//        var question= questions();
-//         var result=resultf(question); 
-        var t = document.getElementById("question").innerHTML;
-         
         function  end(){
                gameover.style.display="block";
                time.style.display= "none";
@@ -54,10 +43,7 @@
             location.reload();
         }  else{
             playing=true;  
-            ques = questions();
-            result = resultf(ques);
-            answerset();
-            
+            questions();
             score = 0; 
             startbox.innerHTML= "Restart Game";
             document.getElementById("time").style.display = "block";
@@ -76,56 +62,15 @@
  }
      function questions(){
          countq+=1;
-         
-         var operation=['*','+','-','/'];
-         var k=Math.round(Math.random()*3);
-         var opr= operation[k];
-          num1= 1+Math.round(Math.random()*10);
-     num2= 1+Math.round(Math.random()*10);
-    
-     document.getElementById("question").innerHTML= num1 +" "+opr+" "+ num2;
-         return document.getElementById("question").innerHTML;
-         
-     }
-         function resultf(q){
-             var arr = q.split(" ");
-             var opra = arr[1];
-             var n1=arr[0];
-             var n2=arr[2];
-             var r;
-//             var num1= 1+Math.round(Math.random()*10);
-//     var num2= 1+Math.round(Math.random()*10);
-             
-         switch(opra){
-             case '*': 
-                 result = n1*n2;
-                 break;
-                 case '+': 
-                 result = parseInt(n1) + parseInt(n2);
-                 break;
-                 case '-': 
-                 result = n1-n2;
-                 break;
-                 case '/': 
-                 r = n1/n2;
-                 result = r.toFixed(2);
-                 break;
-             default: 
-                 break;
-                  
-         }
-              return result; 
-             
-             
-         }
-        
-        function answerset(){
-             var a= Math.round(Math.random()*3);
+     var num1= Math.round(Math.random()*10);
+     var num2= Math.round(Math.random()*10);
+     
+     document.getElementById("question").innerHTML= num1 +"*"+ num2;
+     var a= Math.round(Math.random()*3);
+      result= num1*num2;
          var answers=[];
       answersArray =  answers;
          answers[a]= result ;
-            
-            
      for(i=0;i<4;i++){
          if(answers[i]==null){
              answers[i]=Math.round(Math.random()*100);
@@ -135,7 +80,11 @@
      option2.innerHTML=answers[1];
      option3.innerHTML=answers[2];
      option4.innerHTML=answers[3];
-        }
+     
+     } 
+        
+        
+        
  function answered(i){
      
      counta+=1;
@@ -145,10 +94,7 @@
                   hide("correct")},1000);
               score+=1;
                document.getElementById("scorevalue").innerHTML= score;
-              ques = questions();
-            result = resultf(ques);
-            answerset();
-              
+              questions();
           }
      else{
           show("wrong")
